@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Влияние социальных сетей</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ========== Index Page Specific Styles ========== */
+    
+    /* Hero Section */
+    .hero {
+      background: var(--surface-highlight), var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm), var(--shadow-md), var(--shadow-lg);
+      border-top: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 2.5rem;
+      color: var(--text);
+      margin-bottom: 1rem;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .hero-text p {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-illustration {
+      width: 100%;
+      max-width: 340px;
+      height: 220px;
+      margin: 0 auto;
+      background: radial-gradient(500px 220px at 30% 20%, rgba(255, 255, 255, 0.42), transparent 55%),
+        linear-gradient(135deg, rgba(245, 232, 224, 0.95) 0%, rgba(255, 232, 220, 0.78) 100%);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      position: relative;
+      border: 1px solid rgba(90, 35, 35, 0.07);
+    }
+
+    .floating-icon {
+      position: absolute;
+      animation: float 3s ease-in-out infinite;
+      font-size: 1.2rem;
+    }
+    .floating-icon:nth-child(1) { top: 15px; right: 25px; animation-delay: 0s; }
+    .floating-icon:nth-child(2) { top: 50px; left: 15px; animation-delay: 0.5s; }
+    .floating-icon:nth-child(3) { bottom: 30px; right: 35px; animation-delay: 1s; }
+
+    /* Info Cards */
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-card {
+      background: var(--surface-highlight), var(--surface);
+      padding: 1.75rem 1.25rem;
+      border-radius: 24px;
+      box-shadow: var(--shadow-sm), 0 6px 12px rgba(107, 43, 43, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+    }
+
+    .info-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-sm), 0 12px 24px rgba(107, 43, 43, 0.07);
+    }
+
+    .info-card.problem {
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent 40%),
+        linear-gradient(155deg, #f5e8e4 0%, #f0ddd8 100%);
+    }
+
+    .info-card.research {
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent 40%),
+        linear-gradient(155deg, #8a5a52 0%, #7a4a42 100%);
+      color: white;
+    }
+    .info-card.research h3, .info-card.research p { color: white; }
+
+    .info-card.impact {
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12), transparent 40%),
+        linear-gradient(155deg, #e8d5ce 0%, #ddc8c0 100%);
+    }
+
+    .info-card-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+    .info-card h3 { font-size: 1.15rem; margin-bottom: 0.4rem; color: var(--text); font-weight: 700; }
+    .info-card p { font-size: 0.85rem; color: var(--text-light); }
+
+    /* Statistics Section */
+    .statistics {
+      background: var(--surface-highlight), var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm), 0 6px 12px rgba(107, 43, 43, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .stat-card {
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.08), transparent 35%),
+        linear-gradient(155deg, #ede7e3 0%, #f0e9e5 100%);
+      padding: 1.75rem;
+      border-radius: var(--radius-sm);
+      text-align: center;
+    }
+
+    .stat-card h3 { font-size: 1rem; color: var(--text); font-weight: 600; }
+
+    /* Problems Section */
+    .problems {
+      background: var(--surface-highlight), var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm), 0 6px 12px rgba(107, 43, 43, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .problem-card {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.08), transparent 35%),
+        linear-gradient(155deg, #ede7e3 0%, #f0e9e5 100%);
+      padding: 1.25rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .problem-illustration { font-size: 2.2rem; }
+    .problem-text h3 { font-size: 1rem; color: var(--text); font-weight: 600; margin-bottom: 0.25rem; }
+    .problem-text p { font-size: 0.85rem; color: var(--text-light); }
+
+    /* Solutions Section */
+    .solutions {
+      background: var(--surface-highlight), var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow-sm), 0 6px 12px rgba(107, 43, 43, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .solution-card {
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.08), transparent 35%),
+        linear-gradient(155deg, #ede7e3 0%, #f0e9e5 100%);
+      padding: 1.75rem 1.25rem;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .solution-card:hover { transform: translateY(-4px); }
+
+    .solution-icon {
+      width: 70px;
+      height: 70px;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), transparent 60%),
+        linear-gradient(155deg, #f5e8e4 0%, #ede0db 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 1rem;
+    }
+
+    .solution-card h3 { color: var(--text); font-size: 0.95rem; font-weight: 600; }
+
+    .btn-center { text-align: center; }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .hero { padding: 2.5rem 2rem; }
+      .hero-content { grid-template-columns: 1fr; text-align: center; }
+      .hero-text h1 { font-size: 2rem; }
+      .hero-image { order: -1; }
+      .info-cards { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .problems-grid { grid-template-columns: 1fr; }
+      .solutions-grid { grid-template-columns: 1fr; }
+      .statistics, .problems, .solutions { padding: 2rem 1.5rem; }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 2rem 1.5rem; border-radius: 24px; }
+      .hero-text h1 { font-size: 1.6rem; }
+      .hero-illustration { height: 180px; font-size: 2.2rem; }
+      .problem-card { flex-direction: column; text-align: center; }
+      .statistics, .problems, .solutions { border-radius: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a class="logo" href="index.html">Влияние соцсетей</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Главная</a></li>
+      <li><a href="problem.html">Проблема</a></li>
+      <li><a href="research.html">Исследование</a></li>
+      <li><a href="impact.html">Влияние</a></li>
+      <li><a href="index.html#conclusion" class="btn-primary">Выводы</a></li>
+    </ul>
+    <button id="menuToggle" class="menu-toggle" aria-label="Открыть меню">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<div id="mobileMenu" class="mobile-menu" hidden>
+  <a href="index.html" class="active">Главная</a>
+  <a href="problem.html">Проблема</a>
+  <a href="research.html">Исследование</a>
+  <a href="impact.html">Влияние</a>
+  <a href="index.html#conclusion">Выводы</a>
+</div>
+
+<main class="page-content">
+  <div class="container">
+    <!-- Hero -->
+    <section class="hero reveal">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Влияние социальных сетей на социальные отношения и коммуникацию</h1>
+          <p>Изучаем, как соцсети изменяют нашу жизнь, общение и восприятие мира</p>
+          <a class="btn-secondary" href="problem.html">Узнать больше</a>
+        </div>
+        <div class="hero-image">
+          <div class="hero-illustration">
+            👥📱💬
+            <span class="floating-icon">❤️</span>
+            <span class="floating-icon">💭</span>
+            <span class="floating-icon">👍</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info Cards -->
+    <section class="info-cards">
+      <a class="info-card problem reveal" href="problem.html">
+        <div class="info-card-icon">💔</div>
+        <h3>Проблема</h3>
+        <p>В чём негативное влияние соцсетей?</p>
+      </a>
+      <a class="info-card research reveal" href="research.html">
+        <div class="info-card-icon">🔍</div>
+        <h3>Исследование</h3>
+        <p>Результаты опросов и анализа</p>
+      </a>
+      <a class="info-card impact reveal" href="impact.html">
+        <div class="info-card-icon">💬</div>
+        <h3>Влияние</h3>
+        <p>Плюсы и минусы социальных сетей</p>
+      </a>
+    </section>
+
+    <!-- Statistics -->
+    <section class="statistics reveal" id="research">
+      <h2 class="section-title">Статистика и Факты</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>Рост использования соцсетей</h3>
+        </div>
+        <div class="stat-card">
+          <h3>Влияние на общение</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problems & Risks -->
+    <section class="problems reveal" id="impact">
+      <h2 class="section-title">Проблемы и Риски</h2>
+      <div class="problems-grid">
+        <div class="problem-card">
+          <div class="problem-illustration">📱</div>
+          <div class="problem-text">
+            <h3>Зависимость</h3>
+            <p>Слишком много времени в соцсетях влияет на продуктивность</p>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-illustration">😔</div>
+          <div class="problem-text">
+            <h3>Одиночество</h3>
+            <p>Чувство изоляции и одиночества несмотря на тысячи «друзей»</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solutions -->
+    <section class="solutions reveal" id="conclusion">
+      <h2 class="section-title">Как улучшить ситуацию?</h2>
+      <div class="solutions-grid">
+        <div class="solution-card">
+          <div class="solution-icon">⏰</div>
+          <h3>Ограничение времени</h3>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon">🛡️</div>
+          <h3>Безопасность в сети</h3>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon">👫</div>
+          <h3>Живое общение</h3>
+        </div>
+      </div>
+      <div class="btn-center">
+        <a class="btn-secondary" href="impact.html">Подробнее</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-title">Влияние социальных сетей</div>
+    <div class="footer-bottom">© 2025 Анапияева Амина</div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

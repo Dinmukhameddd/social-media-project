@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Исследование - Влияние социальных сетей</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ========== Research Page Specific Styles ========== */
+    
+    /* Hero Section */
+    .hero {
+      background: var(--surface-highlight), var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm), var(--shadow-md), var(--shadow-lg);
+      border-top: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      color: var(--text);
+      margin-bottom: 1rem;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .hero h2 {
+      font-size: 1.3rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .hero-description {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Charts Section */
+    .charts-section {
+      background: var(--surface-highlight), var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm), 0 6px 12px rgba(107, 43, 43, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .chart-card {
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.08), transparent 35%),
+        linear-gradient(155deg, #ede7e3 0%, #f0e9e5 100%);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      box-shadow: inset 0 2px 4px rgba(107, 43, 43, 0.04);
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* Pie Chart */
+    .pie-chart-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .pie-chart {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #8a5a52 0% 54.5%,
+        #c9a59e 54.5% 75%,
+        #e8d5ce 75% 93.2%,
+        #f5e8e4 93.2% 100%
+      );
+      box-shadow: 0 4px 12px rgba(107, 43, 43, 0.15);
+    }
+
+    .pie-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    .color-1 { background: #8a5a52; }
+    .color-2 { background: #c9a59e; }
+    .color-3 { background: #e8d5ce; }
+    .color-4 { background: #f5e8e4; }
+
+    .legend-percent {
+      font-weight: 600;
+      color: var(--text);
+      margin-left: auto;
+    }
+
+    /* Bar Chart */
+    .bar-chart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .bar-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .bar-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .bar-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .bar {
+      height: 24px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+    }
+
+    .bar-1 { width: 100%; }
+    .bar-2 { width: 71%; }
+    .bar-3 { width: 55%; }
+    .bar-4 { width: 32%; }
+
+    .bar-value {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    /* Expert Section */
+    .expert-section {
+      background: var(--surface-highlight), var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm), 0 6px 12px rgba(107, 43, 43, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .expert-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .expert-title {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .expert-name {
+      font-size: 1.5rem;
+      color: var(--text);
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+
+    .expert-quote {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      padding: 1.25rem 1.5rem;
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.08), transparent 35%),
+        linear-gradient(155deg, #ede7e3 0%, #f0e9e5 100%);
+      border-radius: var(--radius-md);
+      position: relative;
+      font-style: italic;
+    }
+
+    .expert-quote::before {
+      content: '"';
+      position: absolute;
+      top: -8px;
+      left: 15px;
+      font-size: 3.5rem;
+      color: var(--brand);
+      opacity: 0.3;
+      font-family: Georgia, serif;
+    }
+
+    .expert-photo {
+      width: 100%;
+      max-width: 320px;
+      height: 380px;
+      margin: 0 auto;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: linear-gradient(135deg, #e8d5ce 0%, #ddc8c0 100%);
+    }
+
+    .expert-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+    }
+
+    .btn-cta {
+      background: linear-gradient(135deg, var(--brand-dark) 0%, #7a4a42 100%);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      display: inline-block;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 20px rgba(107, 43, 43, 0.25);
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(107, 43, 43, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .hero { padding: 2.5rem 2rem; }
+      .hero h1 { font-size: 2.2rem; }
+      .charts-section, .expert-section { padding: 2rem 1.5rem; }
+      .charts-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      .expert-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .expert-photo { max-width: 280px; height: 320px; }
+      .pie-chart-container { flex-direction: column; text-align: center; }
+      .pie-legend { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 2rem 1.5rem; border-radius: 24px; }
+      .hero h1 { font-size: 1.8rem; }
+      .hero h2 { font-size: 1.1rem; }
+      .charts-section, .expert-section { border-radius: 24px; }
+      .chart-card { padding: 1.5rem; border-radius: 18px; }
+      .pie-chart { width: 140px; height: 140px; }
+      .expert-name { font-size: 1.25rem; }
+      .expert-quote { font-size: 0.9rem; padding: 1rem 1.25rem; }
+      .expert-photo { height: 280px; }
+      .btn-cta { padding: 0.85rem 2rem; font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a class="logo" href="index.html">Влияние соцсетей</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="problem.html">Проблема</a></li>
+      <li><a href="research.html" class="active">Исследование</a></li>
+      <li><a href="impact.html">Влияние</a></li>
+      <li><a href="index.html#conclusion" class="btn-primary">Выводы</a></li>
+    </ul>
+    <button id="menuToggle" class="menu-toggle" aria-label="Открыть меню">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<div id="mobileMenu" class="mobile-menu" hidden>
+  <a href="index.html">Главная</a>
+  <a href="problem.html">Проблема</a>
+  <a href="research.html" class="active">Исследование</a>
+  <a href="impact.html">Влияние</a>
+  <a href="index.html#conclusion">Выводы</a>
+</div>
+
+<main class="page-content">
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero reveal">
+      <h1>Исследование</h1>
+      <h2>Результаты опросов и анализа</h2>
+      <p class="hero-description">Мы провели исследование, чтобы выяснить, как социальные сети влияют на наше общение и отношения.</p>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="charts-section reveal">
+      <h2 class="section-title">Рост популярности соцсетей</h2>
+      <div class="charts-grid">
+        <!-- Pie Chart Card -->
+        <div class="chart-card reveal delay-1">
+          <h3 class="chart-title">Как часто вы общаетесь с друзьями онлайн вместо живого общения?</h3>
+          <div class="pie-chart-container">
+            <div class="pie-chart"></div>
+            <div class="pie-legend">
+              <div class="legend-item">
+                <span class="legend-color color-1"></span>
+                <span>Часто</span>
+                <span class="legend-percent">54,5%</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color color-2"></span>
+                <span>Редко</span>
+                <span class="legend-percent">20,5%</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color color-3"></span>
+                <span>Иногда</span>
+                <span class="legend-percent">18,2%</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color color-4"></span>
+                <span>Почти всегда</span>
+                <span class="legend-percent">6,8%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bar Chart Card -->
+        <div class="chart-card reveal delay-2">
+          <h3 class="chart-title">Какие действия в соцсетях вы чаще всего выполняете?</h3>
+          <div class="bar-chart-container">
+            <div class="bar-item">
+              <span class="bar-label">Просмотр новостей и публикаций</span>
+              <div class="bar-wrapper">
+                <div class="bar bar-1"></div>
+                <span class="bar-value">38,6%</span>
+              </div>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Общение</span>
+              <div class="bar-wrapper">
+                <div class="bar bar-2"></div>
+                <span class="bar-value">27,5%</span>
+              </div>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Публикация фото, видео, историй</span>
+              <div class="bar-wrapper">
+                <div class="bar bar-3"></div>
+                <span class="bar-value">21,3%</span>
+              </div>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Игры и развлекательный контент</span>
+              <div class="bar-wrapper">
+                <div class="bar bar-4"></div>
+                <span class="bar-value">12,5%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Expert Opinion Section -->
+    <section class="expert-section reveal">
+      <div class="expert-grid">
+        <div class="expert-content">
+          <p class="expert-title">Клинический психолог, профориентолог</p>
+          <h3 class="expert-name">Асаинова Асем Елеусизовна</h3>
+          <blockquote class="expert-quote">
+            Если большая часть общения происходит онлайн, подростку становится сложнее выстраивать глубокий и доверительный контакт в реальной жизни. Живое общение требует эмоционального участия, умения слушать и реагировать на чувства другого человека. От этого проще «спрятаться» в телефоне, избегая сложных эмоций.
+          </blockquote>
+        </div>
+        <div class="expert-photo">
+          <img src="assets/psychologist.jpg" alt="Асаинова Асем Елеусизовна">
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section reveal">
+      <a class="btn-cta" href="impact.html">Подробнее о влиянии</a>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-title">Влияние социальных сетей</div>
+    <div class="footer-bottom">© 2025 Анапияева Амина</div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
