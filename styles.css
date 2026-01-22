@@ -155,6 +155,10 @@ body {
   z-index: 999;
 }
 
+.mobile-menu[hidden] {
+  display: none !important;
+}
+
 .mobile-menu a {
   text-decoration: none;
   color: var(--text);
